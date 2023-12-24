@@ -1,0 +1,10 @@
+h2 {
+  font-size: 4rem;
+  display: inline;
+  font-weight: 400;
+}
+span {
+  display: inline-block;
+  font-weight: 800;
+  margin: 0 1rem;
+}
