@@ -1,10 +1,18 @@
 h2 {
   font-size: 4rem;
+  margin: 3rem 0;
   display: inline;
   font-weight: 400;
+  color: #252424;
 }
 span {
   display: inline-block;
   font-weight: 800;
   margin: 0 1rem;
+}
+.completed-tasks {
+  color: #07d396;
+}
+.total-tasks {
+  color: #067b8d;
 }

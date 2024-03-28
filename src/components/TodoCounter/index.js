@@ -9,7 +9,7 @@ function TodoCounter({ completed, total }) {
       <span className={`completed-tasks`}>{completed}</span>
       de
       <span className={`total-tasks`}>{total}</span>
-      TODOs
+      tareas
     </h2>
   );
 }
