@@ -4,7 +4,7 @@ import "./TodoCounterStyles.css";
 function TodoCounter({ completed, total }) {
   return (
     <h2 className={`title`}>
-      Has completado
+      Hoy has completado
       <br />
       <span className={`completed-tasks`}>{completed}</span>
       de

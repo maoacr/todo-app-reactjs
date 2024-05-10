@@ -6,16 +6,18 @@ import { TodoItem } from "./components/TodoItem";
 import { CreateTodoButton } from "./components/CreateTodoButton";
 import "./App.css";
 
-const defaultTodos = [
-  { text: "Cortar cebolla", completed: true },
-  { text: "Estudiar todos los dias", completed: true },
-  { text: "Prueba de texto largo por cualquier razon", completed: true },
-  { text: "Terminar el curso de React.js", completed: true },
-  { text: "Tomar café", completed: true },
-];
-
 function App() {
-  const [todos, setTodos] = React.useState(defaultTodos);
+  const localStorageTODOs = localStorage.getItem("TODOS");
+  let parsedTODOs;
+
+  if (!localStorageTODOs) {
+    localStorage.setItem("TODOS", JSON.stringify([]));
+    parsedTODOs = [];
+  } else {
+    parsedTODOs = JSON.parse(localStorageTODOs);
+  }
+
+  const [todos, setTodos] = React.useState(parsedTODOs);
   const [searchValue, setSearchValue] = React.useState("");
 
   const completedTodos = todos.filter((todo) => todo.completed).length;
@@ -25,6 +27,26 @@ function App() {
     const searchText = searchValue.toLowerCase();
     return todoText.includes(searchText);
   });
+
+  const updateTODOs = (updatedTODOs) => {
+    localStorage.setItem("TODOS", JSON.stringify(updatedTODOs));
+    setTodos(updatedTODOs);
+  };
+
+  const completeTodo = (text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
+    newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
+    updateTODOs(newTodos);
+  };
+
+  const deleteTodo = (text) => {
+    console.log("Delete");
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
+    newTodos.splice(todoIndex, 1);
+    updateTODOs(newTodos);
+  };
 
   return (
     <React.Fragment>
@@ -39,6 +61,8 @@ function App() {
               key={todo.text}
               text={todo.text}
               completed={todo.completed}
+              onComplete={() => completeTodo(todo.text)}
+              onDelete={() => deleteTodo(todo.text)}
             />
           ))}
         </TodoList>
