@@ -1,14 +1,10 @@
 import React from "react";
 import "./TodoSearchStyles.css";
 
-function TodoSearch() {
-  const handleChange = (e) => {
-    console.log(e.target.value);
-  };
-
+function TodoSearch({ searchValue, setSearchValue }) {
   return (
     <input
-      onChange={(e) => handleChange(e)}
+      onChange={(e) => setSearchValue(e.target.value)}
       placeholder="Qué tarea quieres recordar ?"
     />
   );
