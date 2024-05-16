@@ -1,21 +1,24 @@
-import React from "react";
+import { React, useState } from "react";
 import { AppUI } from "../App/AppUI";
-import { useLocalStorage } from "..//Hooks/useLocalStorage";
+import { useLocalStorage } from "../Hooks/useLocalStorage";
 
 function App() {
-  const [todos, updateItems] = useLocalStorage("TODOS", []);
-  const [searchValue, setSearchValue] = React.useState("");
+  const { item, updateItems, isLoading, isError } = useLocalStorage(
+    "TODOS",
+    []
+  );
+  const [searchValue, setSearchValue] = useState("");
 
-  const completedTodos = todos.filter((todo) => todo.completed).length;
-  const totalTodos = todos.length;
-  const searchedTodos = todos.filter((todo) => {
+  const completedTodos = item.filter((todo) => todo.completed).length;
+  const totalTodos = item.length;
+  const searchedTodos = item.filter((todo) => {
     const todoText = todo.text.toLowerCase();
     const searchText = searchValue.toLowerCase();
     return todoText.includes(searchText);
   });
 
   const completeTodo = (text) => {
-    const newTodos = [...todos];
+    const newTodos = [...item];
     const todoIndex = newTodos.findIndex((todo) => todo.text === text);
     newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
     updateItems(newTodos);
@@ -23,8 +26,7 @@ function App() {
 
   const deleteTodo = (text) => {
     console.log("Delete");
-    const newTodos = [...todos];
-    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
+    const newTodos = [...item];
     newTodos.splice(todoIndex, 1);
     updateItems(newTodos);
   };
@@ -38,6 +40,8 @@ function App() {
       setSearchValue={setSearchValue}
       completeTodo={completeTodo}
       deleteTodo={deleteTodo}
+      isLoading={isLoading}
+      isError={isError}
     />
   );
 }
