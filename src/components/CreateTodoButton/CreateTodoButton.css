@@ -14,7 +14,7 @@
   justify-content: center;
   height: 64px;
   width: 64px;
-
+  z-index: 2;
   transform: rotate(0);
   transition: 0.3s ease;
 }

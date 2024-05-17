@@ -24,7 +24,7 @@ function useLocalStorage(itemName, initialValue) {
         setIsLoading(false);
         setIsError(true);
       }
-    }, 3000);
+    }, 1000);
   });
 
   const updateItems = (updatedItems) => {
