@@ -22,7 +22,8 @@ function AppUI() {
     isLoading,
     isError,
     isOpenModal,
-    setIsOpenModal,
+    totalTodos,
+    // setIsOpenModal,
   } = React.useContext(ToDoContext);
   return (
     <React.Fragment>
@@ -34,7 +35,7 @@ function AppUI() {
         <TodoList>
           {isLoading && <Loader />}
           {isError && <Error />}
-          {!isLoading && searchedTodos === 0 && <p>Crea tu primer ToDo</p>}
+          {!isLoading && totalTodos === 0 && <p>Crea tu primer ToDo</p>}
           {searchedTodos.map((todo) => (
             <TodoItem
               key={todo.text}

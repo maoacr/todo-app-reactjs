@@ -6,11 +6,3 @@ main {
   max-width: 600px;
   margin: 0 auto;
 }
-
-#modalContainer {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  place-items: center;
-}
